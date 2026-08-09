@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050b12;
+  --foreground: #f5f1e8;
+
+  --cosmos: #0d1b2a;
+  --cosmos-deep: #03070c;
+
+  --gold: #d4af37;
+  --gold-soft: #f0d37a;
+
+  --cyan: #00b4d8;
+  --cyan-soft: #7be5f5;
+
+  --muted: #9ba8b4;
 }
 
 @theme inline {
@@ -12,15 +23,460 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+.helios-landing {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px 92px;
+  isolation: isolate;
+
+  background:
+    radial-gradient(
+      circle at 50% 28%,
+      rgba(212, 175, 55, 0.09),
+      transparent 30%
+    ),
+    linear-gradient(180deg, #07111c 0%, #03070c 100%);
+}
+
+.helios-background {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.helios-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 255, 255, 0.09) 0 1px,
+      transparent 1.5px
+    ),
+    radial-gradient(
+      circle at 70% 35%,
+      rgba(255, 255, 255, 0.06) 0 1px,
+      transparent 1.5px
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(0, 180, 216, 0.08) 0 1px,
+      transparent 1.5px
+    );
+
+  background-size:
+    130px 130px,
+    190px 190px,
+    230px 230px;
+
+  opacity: 0.7;
+}
+
+.helios-grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(rgba(0, 180, 216, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 180, 216, 0.035) 1px, transparent 1px);
+
+  background-size: 72px 72px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 26%,
+    black 80%,
+    transparent
+  );
+}
+
+.helios-sun {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  left: 50%;
+  top: 43%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle at 42% 40%,
+    #fff7cf 0%,
+    #f0d37a 12%,
+    #d4af37 31%,
+    rgba(212, 175, 55, 0.12) 61%,
+    transparent 70%
+  );
+
+  filter: blur(1px);
+
+  opacity: 0.17;
+
+  box-shadow:
+    0 0 70px rgba(212, 175, 55, 0.32),
+    0 0 160px rgba(212, 175, 55, 0.17);
+}
+
+.helios-orbit {
+  position: absolute;
+  left: 50%;
+  top: 43%;
+
+  border: 1px solid rgba(0, 180, 216, 0.12);
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%) rotate(-12deg);
+}
+
+.orbit-one {
+  width: min(74vw, 920px);
+  height: min(37vw, 460px);
+}
+
+.orbit-two {
+  width: min(94vw, 1160px);
+  height: min(47vw, 580px);
+
+  transform: translate(-50%, -50%) rotate(12deg);
+
+  border-color: rgba(212, 175, 55, 0.1);
+}
+
+.helios-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  filter: blur(120px);
+}
+
+.helios-glow-cyan {
+  left: -230px;
+  bottom: -170px;
+
+  background: rgba(0, 180, 216, 0.14);
+}
+
+.helios-glow-gold {
+  right: -230px;
+  top: -210px;
+
+  background: rgba(212, 175, 55, 0.13);
+}
+
+.landing-content {
+  width: min(900px, 100%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-label {
+  margin: 0 0 30px;
+
+  font-size: 0.72rem;
+  line-height: 1;
+
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+
+  color: rgba(245, 241, 232, 0.63);
+}
+
+.module-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 24px;
+
+  font-size: 0.66rem;
+
+  letter-spacing: 0.31em;
+  text-transform: uppercase;
+
+  color: var(--cyan-soft);
+}
+
+.module-label span {
+  display: block;
+
+  width: 34px;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 180, 216, 0.7)
+  );
+}
+
+.module-label span:last-child {
+  transform: rotate(180deg);
+}
+
+.landing-title {
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 950px;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(2.5rem, 6vw, 5.8rem);
+  font-weight: 400;
+
+  line-height: 0.94;
+
+  letter-spacing: -0.035em;
+
+  text-wrap: balance;
+}
+
+.landing-title > span:not(.versus) {
+  background: linear-gradient(
+    180deg,
+    #fffdf6 0%,
+    #eadca8 100%
+  );
+
+  background-clip: text;
+  color: transparent;
+
+  text-shadow: 0 0 45px rgba(212, 175, 55, 0.08);
+}
+
+.landing-title .versus {
+  margin: 14px 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: clamp(0.82rem, 1.4vw, 1.05rem);
+  font-weight: 600;
+
+  letter-spacing: 0.42em;
+
+  color: var(--gold);
+}
+
+.landing-manifesto {
+  margin: 34px 0 34px;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+  line-height: 1.55;
+
+  color: rgba(245, 241, 232, 0.72);
+}
+
+.start-button {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+
+  padding: 17px 24px 17px 28px;
+
+  border: 1px solid rgba(212, 175, 55, 0.55);
+
+  border-radius: 3px;
+
+  color: #f8e7a9;
+  background: rgba(212, 175, 55, 0.055);
+
+  cursor: pointer;
+
+  letter-spacing: 0.2em;
+
+  font-size: 0.72rem;
+  font-weight: 600;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.start-button:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(212, 175, 55, 0.9);
+
+  background: rgba(212, 175, 55, 0.11);
+
+  box-shadow:
+    0 0 30px rgba(212, 175, 55, 0.11),
+    inset 0 0 20px rgba(212, 175, 55, 0.025);
+}
+
+.start-button:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 5px;
+}
+
+.button-arrow {
+  font-size: 1.15rem;
+  line-height: 1;
+
+  color: var(--cyan-soft);
+
+  transition: transform 180ms ease;
+}
+
+.start-button:hover .button-arrow {
+  transform: translateX(5px);
+}
+
+.landing-question {
+  margin: 24px 0 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 0.92rem;
+  font-style: italic;
+
+  color: rgba(245, 241, 232, 0.44);
+}
+
+.landing-footer {
+  position: absolute;
+
+  left: 50%;
+  bottom: 27px;
+
+  transform: translateX(-50%);
+
+  width: min(620px, calc(100% - 48px));
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  font-size: 0.56rem;
+
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+
+  color: rgba(155, 168, 180, 0.46);
+}
+
+.footer-line {
+  flex: 1;
+  max-width: 72px;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(155, 168, 180, 0.08),
+    rgba(155, 168, 180, 0.34),
+    rgba(155, 168, 180, 0.08)
+  );
+}
+
+@media (max-width: 700px) {
+  .helios-landing {
+    padding: 40px 20px 100px;
+  }
+
+  .project-label {
+    margin-bottom: 26px;
+
+    font-size: 0.6rem;
+    line-height: 1.7;
+
+    letter-spacing: 0.25em;
+  }
+
+  .landing-title {
+    font-size: clamp(2.25rem, 11vw, 4rem);
+    line-height: 0.98;
+  }
+
+  .landing-manifesto {
+    margin-top: 28px;
+  }
+
+  .start-button {
+    gap: 14px;
+
+    padding: 16px 18px 16px 20px;
+
+    letter-spacing: 0.13em;
+
+    font-size: 0.64rem;
+  }
+
+  .landing-footer {
+    gap: 8px;
+
+    font-size: 0.47rem;
+
+    letter-spacing: 0.12em;
+  }
+
+  .footer-line {
+    max-width: 28px;
+  }
+
+  .helios-sun {
+    width: 280px;
+    height: 280px;
+  }
+
+  .orbit-one {
+    width: 135vw;
+    height: 68vw;
+  }
+
+  .orbit-two {
+    width: 175vw;
+    height: 87vw;
+  }
 }
