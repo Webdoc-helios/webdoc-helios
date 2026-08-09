@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import HeliosChat from "./components/HeliosChat";
 
-type Screen = "landing" | "problem" | "observation";
+type Screen = "landing" | "problem" | "observation" | "ptolemy";
 type InitialAnswer = "sun" | "earth" | "unsure" | null;
 type Classification = "observation" | "interpretation" | null;
 
@@ -24,7 +25,175 @@ export default function Home() {
       [id]: type,
     }));
   }
+  if (screen === "ptolemy") {
+    return (
+      <main className="ptolemy-screen">
+        <div className="ptolemy-background" aria-hidden="true">
+          <div className="ptolemy-stars ptolemy-stars-one" />
+          <div className="ptolemy-stars ptolemy-stars-two" />
 
+          <div className="geocentric-system">
+            <div className="earth-center">
+              <div className="earth-surface" />
+            </div>
+
+            <div className="geo-orbit geo-orbit-one">
+              <div className="geo-sun">
+                <div className="geo-sun-core" />
+              </div>
+            </div>
+
+            <div className="geo-orbit geo-orbit-two" />
+
+            <div className="geo-orbit geo-orbit-three" />
+
+            <div className="fixed-stars-ring" />
+          </div>
+        </div>
+
+        <header className="experience-header">
+          <button
+            type="button"
+            className="back-button"
+            onClick={() => setScreen("observation")}
+          >
+            ← VOLVER
+          </button>
+
+          <div className="chapter-progress">
+            <span className="progress-number">03</span>
+
+            <span className="progress-line">
+              <span
+                className="progress-active"
+                style={{ width: "40%" }}
+              />
+            </span>
+
+            <span className="progress-label">PTOLOMEO</span>
+          </div>
+        </header>
+
+        <section className="ptolemy-content">
+          <div className="ptolemy-copy">
+            <div className="historical-label">
+              <span />
+              ALEJANDRÍA · SIGLO II
+            </div>
+
+            <p className="character-name">CLAUDIO PTOLOMEO</p>
+
+            <h1 className="ptolemy-title">
+              Si la Tierra parece inmóvil,
+              <br />
+              <span>¿por qué no construir el cielo alrededor de ella?</span>
+            </h1>
+
+            <p className="ptolemy-intro">
+              Desde la superficie terrestre no sentimos que el suelo se mueva.
+              En cambio, vemos al Sol, la Luna y las estrellas recorrer el cielo.
+            </p>
+
+            <div className="ptolemy-reasoning">
+              <div className="reasoning-step">
+                <span className="reasoning-number">01</span>
+
+                <div>
+                  <small>OBSERVACIÓN</small>
+                  <p>El Sol parece desplazarse a través del cielo.</p>
+                </div>
+              </div>
+
+              <span className="reasoning-arrow">↓</span>
+
+              <div className="reasoning-step">
+                <span className="reasoning-number">02</span>
+
+                <div>
+                  <small>INFERENCIA</small>
+                  <p>La Tierra parece permanecer quieta.</p>
+                </div>
+              </div>
+
+              <span className="reasoning-arrow">↓</span>
+
+              <div className="reasoning-step reasoning-model">
+                <span className="reasoning-number">03</span>
+
+                <div>
+                  <small>MODELO</small>
+                  <p>Los cielos giran alrededor de la Tierra.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="helios-reflection">
+              <span className="helios-reflection-name">HELIOS</span>
+
+              <p>
+                No juzgues todavía el modelo desde lo que sabes hoy.
+                Pregúntate primero qué explicación habrías construido
+                con esas mismas observaciones.
+              </p>
+            </div>
+          </div>
+
+          <aside className="model-panel">
+            <div className="model-panel-header">
+              <span>MODELO GEOCÉNTRICO</span>
+              <span className="model-status">RECONSTRUCCIÓN</span>
+            </div>
+
+            <div className="model-diagram">
+              <div className="mini-orbit mini-orbit-three" />
+              <div className="mini-orbit mini-orbit-two" />
+
+              <div className="mini-orbit mini-orbit-one">
+                <div className="mini-sun" />
+              </div>
+
+              <div className="mini-earth">
+                <span>TIERRA</span>
+              </div>
+            </div>
+
+            <div className="model-legend">
+              <div>
+                <span className="legend-dot earth-dot" />
+                Tierra central
+              </div>
+
+              <div>
+                <span className="legend-dot sun-dot" />
+                Movimiento aparente del Sol
+              </div>
+
+              <div>
+                <span className="legend-line" />
+                Esferas celestes
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <footer className="problem-footer">
+          <span>OBSERVACIÓN</span>
+          <span className="footer-divider" />
+          <span>INFERENCIA</span>
+          <span className="footer-divider" />
+          <span>MODELO</span>
+          <HeliosChat
+            context="
+    Pantalla 03 — Ptolomeo.
+    El estudiante acaba de distinguir observación, inferencia y modelo.
+    Ahora está examinando el modelo geocéntrico de Claudio Ptolomeo.
+    Debe comprender por qué el modelo podía parecer razonable desde las observaciones disponibles.
+  "
+          />
+        </footer>
+      </main>
+    );
+  }
   if (screen === "observation") {
     const completed = Object.values(classifications).every(
       (value) => value !== null
@@ -213,12 +382,23 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="result-formula">
-                <span>LO QUE VEMOS</span>
-                <strong>+</strong>
-                <span>UNA EXPLICACIÓN</span>
-                <strong>→</strong>
-                <span>UN MODELO</span>
+              <div className="observation-result-actions">
+                <div className="result-formula">
+                  <span>LO QUE VEMOS</span>
+                  <strong>+</strong>
+                  <span>UNA EXPLICACIÓN</span>
+                  <strong>→</strong>
+                  <span>UN MODELO</span>
+                </div>
+
+                <button
+                  type="button"
+                  className="continue-button"
+                  onClick={() => setScreen("ptolemy")}
+                >
+                  CONOCER EL MODELO
+                  <span aria-hidden="true">→</span>
+                </button>
               </div>
             </div>
           )}
@@ -296,9 +476,8 @@ export default function Home() {
           <div className="answer-options">
             <button
               type="button"
-              className={`answer-card ${
-                initialAnswer === "sun" ? "selected" : ""
-              }`}
+              className={`answer-card ${initialAnswer === "sun" ? "selected" : ""
+                }`}
               onClick={() => setInitialAnswer("sun")}
             >
               <span className="answer-index">A</span>
@@ -314,9 +493,8 @@ export default function Home() {
 
             <button
               type="button"
-              className={`answer-card ${
-                initialAnswer === "earth" ? "selected" : ""
-              }`}
+              className={`answer-card ${initialAnswer === "earth" ? "selected" : ""
+                }`}
               onClick={() => setInitialAnswer("earth")}
             >
               <span className="answer-index">B</span>
@@ -332,9 +510,8 @@ export default function Home() {
 
             <button
               type="button"
-              className={`answer-card ${
-                initialAnswer === "unsure" ? "selected" : ""
-              }`}
+              className={`answer-card ${initialAnswer === "unsure" ? "selected" : ""
+                }`}
               onClick={() => setInitialAnswer("unsure")}
             >
               <span className="answer-index">C</span>
